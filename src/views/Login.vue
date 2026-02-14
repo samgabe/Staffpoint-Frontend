@@ -92,6 +92,6 @@ const handleLogin = async () => {
     return;
   }
 
-  router.push("/dashboard");
+  router.push("/app/dashboard");
 };
 </script>

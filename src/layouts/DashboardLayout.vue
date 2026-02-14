@@ -39,7 +39,7 @@
             </nav>
 
             <p class="mb-3 mt-8 px-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">System</p>
-            <router-link to="/settings" class="nav-item text-sm" @click="sidebarOpen = false">
+            <router-link to="/app/settings" class="nav-item text-sm" @click="sidebarOpen = false">
               <Cog6ToothIcon class="h-4 w-4" />
               <span>Settings</span>
             </router-link>
@@ -159,34 +159,34 @@ function canAccess(requiredPermissions = []) {
 
 const menuItems = computed(() => {
   const items = [
-    { label: "Dashboard", to: "/dashboard", icon: ChartBarSquareIcon, badge: null, permissions: [] },
+    { label: "Dashboard", to: "/app/dashboard", icon: ChartBarSquareIcon, badge: null, permissions: [] },
     {
       label: "Employees",
-      to: "/employees",
+      to: "/app/employees",
       icon: UserGroupIcon,
       badge: employeeCount.value,
       permissions: [PERMISSIONS.MANAGE_EMPLOYEES],
     },
     {
       label: "Departments",
-      to: "/departments",
+      to: "/app/departments",
       icon: BuildingOffice2Icon,
       badge: null,
       permissions: [PERMISSIONS.MANAGE_DEPARTMENTS],
     },
-    { label: "Attendance", to: "/attendance", icon: ClipboardDocumentListIcon, badge: null, permissions: [] },
-    { label: "Leaves", to: "/leaves", icon: CalendarDaysIcon, badge: unreadNotifications.value > 0 ? unreadNotifications.value : null, permissions: [] },
-    { label: "Payslips", to: "/payslips", icon: BanknotesIcon, badge: null, permissions: [PERMISSIONS.VIEW_OWN_PAYSLIPS] },
+    { label: "Attendance", to: "/app/attendance", icon: ClipboardDocumentListIcon, badge: null, permissions: [] },
+    { label: "Leaves", to: "/app/leaves", icon: CalendarDaysIcon, badge: unreadNotifications.value > 0 ? unreadNotifications.value : null, permissions: [] },
+    { label: "Payslips", to: "/app/payslips", icon: BanknotesIcon, badge: null, permissions: [PERMISSIONS.VIEW_OWN_PAYSLIPS] },
     {
       label: "Reports",
-      to: "/reports",
+      to: "/app/reports",
       icon: ClipboardDocumentListIcon,
       badge: null,
       permissions: [PERMISSIONS.EXPORT_REPORTS],
     },
     {
       label: "Audit Logs",
-      to: "/audit-logs",
+      to: "/app/audit-logs",
       icon: DocumentTextIcon,
       badge: null,
       permissions: [PERMISSIONS.VIEW_AUDIT_LOGS],

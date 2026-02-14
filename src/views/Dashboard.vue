@@ -7,7 +7,7 @@
       </div>
       <router-link
         v-if="canManageEmployees"
-        to="/employees"
+        to="/app/employees"
         class="inline-flex items-center gap-2 rounded-xl bg-[#112c63] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0c234f]"
       >
         <UserPlusIcon class="h-4 w-4" />
@@ -32,7 +32,7 @@
       <section v-if="canViewOrgEmployees">
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-2xl font-bold text-[#061b4f]">Recent Employees</h2>
-          <router-link to="/employees" class="text-sm font-semibold text-amber-500 hover:text-amber-600">View all</router-link>
+          <router-link to="/app/employees" class="text-sm font-semibold text-amber-500 hover:text-amber-600">View all</router-link>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
           <article v-for="employee in recentEmployees" :key="employee.id" class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -82,7 +82,7 @@
             <p class="mt-1 text-2xl font-bold text-red-700">{{ myRejectedLeaves }}</p>
           </div>
         </div>
-        <router-link to="/leaves" class="mt-4 inline-flex rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+        <router-link to="/app/leaves" class="mt-4 inline-flex rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
           Open Leave Management
         </router-link>
       </section>
@@ -215,15 +215,15 @@ const metrics = computed(() => {
 const quickActions = computed(() => {
   if (!isReviewer.value) {
     return [
-      { label: "Submit leave request", count: myPendingLeaves.value, icon: CalendarDaysIcon, to: "/leaves" },
-      { label: "Clock in/out", count: 0, icon: ClockIcon, to: "/attendance" },
-      { label: "View payslips", count: 0, icon: UsersIcon, to: "/payslips" },
+      { label: "Submit leave request", count: myPendingLeaves.value, icon: CalendarDaysIcon, to: "/app/leaves" },
+      { label: "Clock in/out", count: 0, icon: ClockIcon, to: "/app/attendance" },
+      { label: "View payslips", count: 0, icon: UsersIcon, to: "/app/payslips" },
     ];
   }
   return [
-    { label: "Review pending leaves", count: pendingLeaves.value, icon: ClockIcon, to: "/leaves" },
-    { label: "Manage leave requests", count: pendingLeaves.value, icon: CalendarDaysIcon, to: "/leaves" },
-    { label: "View attendance", count: 0, icon: ChartBarIcon, to: "/attendance" },
+    { label: "Review pending leaves", count: pendingLeaves.value, icon: ClockIcon, to: "/app/leaves" },
+    { label: "Manage leave requests", count: pendingLeaves.value, icon: CalendarDaysIcon, to: "/app/leaves" },
+    { label: "View attendance", count: 0, icon: ChartBarIcon, to: "/app/attendance" },
   ];
 });
 

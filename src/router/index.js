@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
+import Landing from "@/views/Landing.vue";
 import Login from "@/views/Login.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import Employees from "@/views/Employees.vue";
@@ -15,13 +16,14 @@ import DashboardLayout from "@/layouts/DashboardLayout.vue";
 import { PERMISSIONS, hasAllPermissions } from "@/utils/rbac";
 
 const routes = [
+  { path: "/", component: Landing },
   { path: "/login", component: Login, meta: { guestOnly: true } },
   {
-    path: "/",
+    path: "/app",
     component: DashboardLayout,
     meta: { requiresAuth: true },
     children: [
-      { path: "", redirect: "/dashboard" },
+      { path: "", redirect: "/app/dashboard" },
       { path: "dashboard", component: Dashboard },
       { path: "employees", component: Employees, meta: { permissions: [PERMISSIONS.MANAGE_EMPLOYEES] } },
       { path: "departments", component: Departments, meta: { permissions: [PERMISSIONS.MANAGE_DEPARTMENTS] } },
@@ -41,8 +43,8 @@ const router = createRouter({
 });
 
 function defaultRouteForRole(role) {
-  if (role === "admin" || role === "manager") return "/dashboard";
-  return "/attendance";
+  if (role === "admin" || role === "manager") return "/app/dashboard";
+  return "/app/attendance";
 }
 
 router.beforeEach(async (to) => {
@@ -60,6 +62,10 @@ router.beforeEach(async (to) => {
   }
 
   if (to.meta.guestOnly && authStore.isAuthenticated) {
+    return defaultRouteForRole(authStore.user?.role);
+  }
+
+  if (to.path === "/" && authStore.isAuthenticated) {
     return defaultRouteForRole(authStore.user?.role);
   }
 
